@@ -6,7 +6,7 @@
 [![size][size-image]][size-url]
 [![download][download-image]][download-url]
 
-![snapshot](https://tva1.sinaimg.cn/large/0081Kckwgy1gk7gn80s4dj30vm0hm7wh.jpg)
+![snapshot2](https://tva1.sinaimg.cn/large/0081Kckwgy1gk7i31h3zij30t208a17m.jpg)
 
 ## usage
 ```shell
