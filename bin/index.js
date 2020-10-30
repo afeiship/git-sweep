@@ -44,7 +44,7 @@ nx.declare({
     },
     start() {
       program.interactive && this.interactive();
-      this.run();
+      !program.interactive && this.run();
     },
     run() {
       exec('git checkout master && git fetch --all --prune');
