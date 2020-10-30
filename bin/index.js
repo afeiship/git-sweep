@@ -16,6 +16,7 @@ const PROTECTED_BRANCHES = [
   'beta',
   'staging',
   'production',
+  'development',
   'release',
   'dev',
   'develop'
@@ -50,10 +51,9 @@ nx.declare({
       this.run();
     },
     run() {
-      exec('git checkout master');
+      exec('git checkout master && git fetch --all --prune');
       program.local && this.local();
       program.remote && this.remote();
-      exec('git checkout -');
     },
     interactive() {
       inquirer
@@ -83,7 +83,7 @@ nx.declare({
     local() {
       const { locals } = this.branches;
       locals.forEach((item) => {
-        this.execute(item, `git branch -d ${item}`);
+        this.execute(item, `git branch -D ${item}`);
       });
     },
     remote() {
