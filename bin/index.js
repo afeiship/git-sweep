@@ -76,17 +76,36 @@ nx.declare({
         }
       }
     },
-    local() {
-      const { locals } = this.branches;
-      locals.forEach((item) => {
-        this.execute(item, `git branch -D ${item}`);
-      });
+    delete(inScope, inItems) {
+      const scope = `${inScope}s`;
+      const items = inItems || this.branches[scope];
+      if (!inItems && program.interactive) {
+        inquirer
+          .prompt([
+            {
+              type: 'checkbox',
+              message: 'Select scope?',
+              name: scope,
+              choices: this.branches[scope]
+            }
+          ])
+          .then((res) => {
+            this[inScope](res[scope]);
+          });
+      } else {
+        const cmd =
+          inScope === 'local'
+            ? (item) => `git branch -D ${item}`
+            : (item) => `git push origin --delete ${item}`;
+
+        items.forEach((item) => this.execute(item, cmd(item)));
+      }
     },
-    remote() {
-      const { remotes } = this.branches;
-      remotes.forEach((item) => {
-        this.execute(item, `git push origin --delete ${item}`);
-      });
+    local(inItems) {
+      this.delete('local', inItems);
+    },
+    remote(inItems) {
+      this.delete('remote', inItems);
     }
   }
 });
