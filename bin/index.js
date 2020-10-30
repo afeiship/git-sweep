@@ -50,8 +50,10 @@ nx.declare({
       this.run();
     },
     run() {
+      exec('git checkout master');
       program.local && this.local();
       program.remote && this.remote();
+      exec('git checkout -');
     },
     interactive() {
       inquirer
