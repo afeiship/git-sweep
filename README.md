@@ -13,5 +13,18 @@ npm link
 npm install -g git-sweep
 ```
 
+~~~
+Usage: git-sweep [options]
+
+Options:
+  -V, --version           output the version number
+  -d, --debug             only show cmds, but not clean.
+  -l, --local             clean scope to local(default).
+  -r, --remote            clean scope to remote.
+  -i, --interactive       interactive operation cli.
+  -c, --clean <branches>  clean the list branches, split by comma. (eg: branch1,branch2...).
+  -h, --help              display help for command
+~~~
+
 ## resources
 - https://github.com/eridem/cli-tutorial
