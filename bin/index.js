@@ -69,8 +69,8 @@ nx.declare({
           this.run();
         });
     },
-    execute(inCmd) {
-      if (!PROTECTED_BRANCHES.includes(inCmd)) {
+    execute(inItem, inCmd) {
+      if (!PROTECTED_BRANCHES.includes(inItem)) {
         if (program.debug) {
           console.log('[debug]:', inCmd);
         } else {
