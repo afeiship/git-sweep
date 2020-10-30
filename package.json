@@ -1,6 +1,6 @@
 {
   "name": "@feizheng/git-sweep",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Git branch sweep cli.",
   "homepage": "https://github.com/afeiship/git-sweep",
   "author": {
