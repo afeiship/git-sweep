@@ -1,5 +1,6 @@
 # git-sweep
 > Git branch sweep cli.
+
 [![version][version-image]][version-url]
 [![license][license-image]][license-url]
 [![size][size-image]][size-url]
