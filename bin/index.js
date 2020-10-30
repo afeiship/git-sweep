@@ -1,34 +1,94 @@
 #!/usr/bin/env node
-const { Command } = require("commander");
+const { Command } = require('commander');
+const inquirer = require('inquirer');
 
 // next packages:
-require("@feizheng/next-js-core2");
-require("@feizheng/next-absolute-package");
-require("@feizheng/next-git-branch");
+require('@feizheng/next-js-core2');
+require('@feizheng/next-absolute-package');
+require('@feizheng/next-git-branch');
 
 const { version } = nx.absolutePackage();
 const program = new Command();
+const exec = require('child_process').execSync;
+const PROTECTED_BRANCHES = [
+  'master',
+  'test',
+  'beta',
+  'staging',
+  'production',
+  'release',
+  'dev',
+  'develop'
+];
 
 program.version(version);
 
 program
-  .option("-l, --local", "clean scope to local(default).")
-  .option("-r, --remote", "clean scope to remote.")
-  .option("-a, --all", "clean scope to all.")
-  .option("-i, --interactive", "interactive operation cli.")
-  .option("-c, --clean <branches>", "clean the list branches, split by comma. (eg: branch1,branch2...).")
+  .option('-d, --debug', 'only show cmds, but not clean.')
+  .option('-l, --local', 'clean scope to local(default).')
+  .option('-r, --remote', 'clean scope to remote.')
+  .option('-i, --interactive', 'interactive operation cli.')
+  .option(
+    '-c, --clean <branches>',
+    'clean the list branches, split by comma. (eg: branch1,branch2...).'
+  )
   .parse(process.argv);
-
-console.log(program.local);
-console.log(program.remote);
-console.log(program.all);
-console.log(program.clean);
 
 nx.declare({
   statics: {
     init() {
-      console.log("start");
-      console.log(nx.gitBranch());
-    },
+      const app = new this();
+      app.start();
+    }
   },
+  methods: {
+    init() {
+      this.branches = nx.gitBranch();
+    },
+    start() {
+      program.interactive && this.interactive();
+      this.run();
+    },
+    run() {
+      program.local && this.local();
+      program.remote && this.remote();
+    },
+    interactive() {
+      inquirer
+        .prompt([
+          {
+            type: 'checkbox',
+            message: 'Select scope?',
+            name: 'scope',
+            choices: ['local', 'remote']
+          }
+        ])
+        .then(({ scope }) => {
+          program.remote = scope.includes('remote');
+          program.local = scope.includes('local');
+          this.run();
+        });
+    },
+    execute(inCmd) {
+      if (!PROTECTED_BRANCHES.includes(inCmd)) {
+        if (program.debug) {
+          console.log('[debug]:', inCmd);
+        } else {
+          exec(inCmd);
+        }
+      }
+    },
+    local() {
+      const { locals } = this.branches;
+      locals.forEach((item) => {
+        this.execute(item, `git branch -d ${item}`);
+      });
+    },
+    remote() {
+      const { remotes } = this.branches;
+      remotes.forEach((item) => {
+        this.execute(item, `git push origin --delete ${item}`);
+      });
+    }
+  }
 });
