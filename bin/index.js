@@ -29,10 +29,6 @@ program
   .option('-l, --local', 'clean scope to local(default).')
   .option('-r, --remote', 'clean scope to remote.')
   .option('-i, --interactive', 'interactive operation cli.')
-  .option(
-    '-c, --clean <branches>',
-    'clean the list branches, split by comma. (eg: branch1,branch2...).'
-  )
   .parse(process.argv);
 
 nx.declare({
