@@ -10,12 +10,8 @@
 
 ## usage
 ```shell
-# debug
-git clone git@github.com:afeiship/git-sweep.git
-npm link
-
 # production
-npm install -g git-sweep
+npm install -g @feizheng/git-sweep
 ```
 
 ~~~
