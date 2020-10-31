@@ -2,6 +2,7 @@
 const { Command } = require('commander');
 const inquirer = require('inquirer');
 const { resolve } = require('path');
+const chalk = require('chalk');
 
 // next packages:
 require('@feizheng/next-js-core2');
@@ -90,7 +91,7 @@ nx.declare({
     execute(inItem, inCmd) {
       if (!PROTECTED_BRANCHES.includes(inItem)) {
         if (program.debug) {
-          console.log('[debug]:', inCmd);
+          console.log(chalk.green('[debug]:'), chalk.bgRed(inCmd));
         } else {
           exec(inCmd);
         }
