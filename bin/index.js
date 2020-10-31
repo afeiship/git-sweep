@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 const { Command } = require('commander');
 const inquirer = require('inquirer');
-const { resolve } = require('path');
 const chalk = require('chalk');
 
 // next packages:
@@ -46,9 +45,6 @@ program
 nx.declare({
   statics: {
     init() {
-      // @ https://stackoverflow.com/questions/9768444/possible-eventemitter-memory-leak-detected
-      process.setMaxListeners(0);
-
       const app = new this();
       app.start();
     }
