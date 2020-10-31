@@ -10,7 +10,6 @@
 
 ## usage
 ```shell
-# production
 npm install -g @feizheng/git-sweep
 ```
 
