@@ -62,7 +62,8 @@ nx.declare({
       !program.interactive && this.run();
     },
     run() {
-      exec('git checkout master && git fetch --all --prune');
+      console.log(chalk.green('🚗 wating...'));
+      exec('git checkout master 2>/dev/null && git fetch --all --prune');
       if (program.local && program.remote) {
         this.local().then(() => {
           this.remote();
