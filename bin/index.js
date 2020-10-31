@@ -7,6 +7,7 @@ const chalk = require('chalk');
 require('@feizheng/next-js-core2');
 require('@feizheng/next-absolute-package');
 require('@feizheng/next-git-branch');
+require('@feizheng/next-unique');
 
 const { version } = nx.absolutePackage();
 const program = new Command();
@@ -24,16 +25,6 @@ const PROTECTED_BRANCHES = [
   'develop'
 ];
 
-const dynamicBranches = (inItems) => {
-  return inItems.map((item) => {
-    return {
-      name: item,
-      value: item,
-      disabled: PROTECTED_BRANCHES.includes(item)
-    };
-  });
-};
-
 program.version(version);
 
 program
@@ -41,6 +32,11 @@ program
   .option('-l, --local', 'clean scope to local(default).')
   .option('-r, --remote', 'clean scope to remote.')
   .option('-i, --interactive', 'interactive operation cli.')
+  .option('-p, --pushed <list>', 'add protected to default.(eg: -p uat,test1).')
+  .option(
+    '-c, --created <list>',
+    'use new list replace default(dangerous).(eg: -c uat,test1).'
+  )
   .parse(process.argv);
 
 nx.declare({
@@ -48,6 +44,24 @@ nx.declare({
     init() {
       const app = new this();
       app.start();
+    }
+  },
+  properties: {
+    protected() {
+      program.pushed &&
+        program.created &&
+        nx.error('Push/create only exsist one action.');
+
+      switch (true) {
+        case !!program.pushed:
+          return nx.unique(
+            program.pushed.split(',').concat(PROTECTED_BRANCHES)
+          );
+        case !!program.created:
+          return nx.unique(program.created.split(','));
+        default:
+          return PROTECTED_BRANCHES;
+      }
     }
   },
   methods: {
@@ -70,6 +84,15 @@ nx.declare({
         program.remote && this.remote();
       }
     },
+    dynamicBranches(inItems) {
+      return inItems.map((item) => {
+        return {
+          name: item,
+          value: item,
+          disabled: this.protected.includes(item)
+        };
+      });
+    },
     interactive() {
       inquirer
         .prompt([
@@ -87,7 +110,7 @@ nx.declare({
         });
     },
     execute(inItem, inCmd) {
-      if (!PROTECTED_BRANCHES.includes(inItem)) {
+      if (!this.protected.includes(inItem)) {
         if (program.debug) {
           console.log(chalk.green('[debug]:'), chalk.bgRed(inCmd));
         } else {
@@ -106,7 +129,7 @@ nx.declare({
                 type: 'checkbox',
                 message: `Select ${inScope} scope?`,
                 name: scope,
-                choices: dynamicBranches(this.branches[scope])
+                choices: this.dynamicBranches(this.branches[scope])
               }
             ])
             .then((res) => {
