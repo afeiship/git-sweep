@@ -14,6 +14,7 @@ const exec = require('child_process').execSync;
 const PROTECTED_BRANCHES = [
   'master',
   'test',
+  'alpha',
   'beta',
   'staging',
   'production',
