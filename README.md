@@ -21,7 +21,7 @@ Options:
   -d, --debug            only show cmds, but not clean.
   -l, --local            clean scope to local(default).
   -r, --remote           clean scope to remote.
-  -f, --filter <string>  clean by filter.
+  -f, --filter <string>  clean by filter.(eg: -f feature/aric)
   -i, --interactive      interactive operation cli.
   -p, --pushed <list>    add protected to default.(eg: -p uat,test1).
   -c, --created <list>   use new list replace default(dangerous).(eg: -c uat,test1).
