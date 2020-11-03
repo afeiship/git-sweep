@@ -31,7 +31,7 @@ program
   .option('-d, --debug', 'only show cmds, but not clean.')
   .option('-l, --local', 'clean scope to local(default).')
   .option('-r, --remote', 'clean scope to remote.')
-  .option('-f, --filter', 'clean by filter.')
+  .option('-f, --filter <string>', 'clean by filter.')
   .option('-i, --interactive', 'interactive operation cli.')
   .option('-p, --pushed <list>', 'add protected to default.(eg: -p uat,test1).')
   .option(
