@@ -70,8 +70,12 @@ nx.declare({
       this.branches = nx.gitBranch();
     },
     start() {
-      program.interactive && this.interactive();
-      !program.interactive && this.run();
+      if (program.local || program.remote) {
+        program.interactive && this.interactive();
+        !program.interactive && this.run();
+      } else {
+        console.log(chalk.green('🐶 local/remote at least has one.'));
+      }
     },
     run() {
       console.log(chalk.green('🚗 wating...'));
