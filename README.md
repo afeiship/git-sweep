@@ -8,11 +8,13 @@
 
 ![snapshot](https://tva1.sinaimg.cn/large/0081Kckwgy1gk87ynhkbaj30u60asasp.jpg)
 
-## usage
+
+## installation
 ```shell
 npm install -g @feizheng/git-sweep
 ```
 
+## usage
 ~~~
 Usage: git-sweep [options]
 
@@ -27,10 +29,6 @@ Options:
   -c, --created <list>   use new list replace default(dangerous).(eg: -c uat,test1).
   -h, --help             display help for command
 ~~~
-
-## resources
-- https://github.com/eridem/cli-tutorial
-
 
 ## license
 Code released under [the MIT license](https://github.com/afeiship/git-sweep/blob/master/LICENSE.txt).
