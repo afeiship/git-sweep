@@ -11,7 +11,7 @@
 
 ## installation
 ```shell
-npm install -g @feizheng/git-sweep
+npm install -g @jswork/git-sweep
 ```
 
 ## usage
@@ -33,14 +33,14 @@ Options:
 ## license
 Code released under [the MIT license](https://github.com/afeiship/git-sweep/blob/master/LICENSE.txt).
 
-[version-image]: https://img.shields.io/npm/v/@feizheng/git-sweep
-[version-url]: https://npmjs.org/package/@feizheng/git-sweep
+[version-image]: https://img.shields.io/npm/v/@jswork/git-sweep
+[version-url]: https://npmjs.org/package/@jswork/git-sweep
 
-[license-image]: https://img.shields.io/npm/l/@feizheng/git-sweep
+[license-image]: https://img.shields.io/npm/l/@jswork/git-sweep
 [license-url]: https://github.com/afeiship/git-sweep/blob/master/LICENSE.txt
 
-[size-image]: https://img.shields.io/bundlephobia/minzip/@feizheng/git-sweep
+[size-image]: https://img.shields.io/bundlephobia/minzip/@jswork/git-sweep
 [size-url]: https://github.com/afeiship/git-sweep/blob/master/dist/git-sweep.min.js
 
-[download-image]: https://img.shields.io/npm/dm/@feizheng/git-sweep
-[download-url]: https://www.npmjs.com/package/@feizheng/git-sweep
+[download-image]: https://img.shields.io/npm/dm/@jswork/git-sweep
+[download-url]: https://www.npmjs.com/package/@jswork/git-sweep

@@ -1,6 +1,6 @@
 {
-  "name": "@feizheng/git-sweep",
-  "version": "1.0.14",
+  "name": "@jswork/git-sweep",
+  "version": "1.0.0",
   "description": "Git branch sweep cli.",
   "homepage": "https://github.com/afeiship/git-sweep",
   "author": {
@@ -26,7 +26,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
-    "@feizheng/rake-git": "^1.2.1",
     "prettier": "^2.1.2"
   },
   "keywords": [
