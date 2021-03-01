@@ -4,10 +4,10 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 
 // next packages:
-require('@feizheng/next-js-core2');
-require('@feizheng/next-absolute-package');
-require('@feizheng/next-git-branch');
-require('@feizheng/next-unique');
+require('@jswork/next');
+require('@jswork/next-absolute-package');
+require('@jswork/next-git-branch');
+require('@jswork/next-unique');
 
 const { version } = nx.absolutePackage();
 const program = new Command();

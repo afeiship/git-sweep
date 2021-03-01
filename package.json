@@ -14,10 +14,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@feizheng/next-absolute-package": "^1.0.6",
-    "@feizheng/next-git-branch": "^1.0.0",
-    "@feizheng/next-js-core2": "^2.6.0",
-    "@feizheng/next-unique": "^1.0.1",
+    "@jswork/next": "^1.0.5",
+    "@jswork/next-absolute-package": "^1.0.1",
+    "@jswork/next-git-branch": "^1.0.0",
+    "@jswork/next-unique": "^1.0.0",
     "chalk": "^4.1.0",
     "commander": "^6.2.0",
     "inquirer": "^7.3.3"
