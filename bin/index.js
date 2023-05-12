@@ -138,7 +138,7 @@ nx.declare({
     execute(inItem, inCmd) {
       const force = inItem === null;
       if (!this.protected.includes(inItem)) {
-        if (inItem.includes(program.filter) || !program.filter || force) {
+        if (force || inItem.includes(program.filter) || !program.filter) {
           if (program.debug) {
             console.log(chalk.green('[debug]:'), chalk.bgRed(inCmd));
           } else {
