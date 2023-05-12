@@ -34,6 +34,7 @@ program
   .option('-f, --filter <string>', 'clean by filter.(eg: -f feature/aric)')
   .option('-i, --interactive', 'interactive operation cli.')
   .option('-p, --pushed <list>', 'add protected to default.(eg: -p uat,test1).')
+  .option('-k, --clean-gh', 'clean github tags+release.')
   .option(
     '-c, --created <list>',
     'use new list replace default(dangerous).(eg: -c uat,test1).'
@@ -70,12 +71,32 @@ nx.declare({
       this.branches = nx.gitBranch();
     },
     start() {
+      if (program.cleanGh) return this.cleanGh();
       if (program.local || program.remote) {
         program.interactive && this.interactive();
         !program.interactive && this.run();
       } else {
         console.log(chalk.green('🐶 local/remote at least has one.'));
       }
+    },
+    cleanGh() {
+      // clean local tags
+      const pipes1 = ['git tag -l', 'xargs git tag -d'];
+      const pipes2 = [
+        'git ls-remote --tags origin',
+        'grep -v "{}"',
+        "awk '{print $2}'",
+        'xargs git push --delete origin'
+      ];
+      const pipes3 = [
+        'gh release list --limit 9999',
+        "awk 'NR>1 {print $2}'",
+        'xargs -I {} gh release delete {} -y'
+      ];
+
+      const cmds = [pipes1, pipes2, pipes3];
+      cmds.forEach((pipes) => this.execute(pipes.join(' | ')));
+      console.log(chalk.green('🐶 clean gh done.'));
     },
     run() {
       console.log(chalk.green('🚗 wating...'));
