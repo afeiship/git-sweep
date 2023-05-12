@@ -95,7 +95,7 @@ nx.declare({
       ];
 
       const cmds = [pipes1, pipes2, pipes3];
-      cmds.forEach((pipes) => this.execute(pipes.join(' | ')));
+      cmds.forEach((pipes) => this.execute('master', pipes.join(' | ')));
       console.log(chalk.green('🐶 clean gh done.'));
     },
     run() {
