@@ -95,7 +95,7 @@ nx.declare({
       ];
 
       const cmds = [pipes1, pipes2, pipes3];
-      cmds.forEach((pipes) => this.execute('master', pipes.join(' | ')));
+      cmds.forEach((pipes) => this.execute(null, pipes.join(' | ')));
       console.log(chalk.green('🐶 clean gh done.'));
     },
     run() {
@@ -136,8 +136,9 @@ nx.declare({
         });
     },
     execute(inItem, inCmd) {
+      const force = inItem === null;
       if (!this.protected.includes(inItem)) {
-        if (inItem.includes(program.filter) || !program.filter) {
+        if (inItem.includes(program.filter) || !program.filter || force) {
           if (program.debug) {
             console.log(chalk.green('[debug]:'), chalk.bgRed(inCmd));
           } else {
