@@ -26,6 +26,10 @@ Options:
   -f, --filter <string>  clean by filter.(eg: -f feature/aric)
   -i, --interactive      interactive operation cli.
   -p, --pushed <list>    add protected to default.(eg: -p uat,test1).
+  -k, --clean-gh         clean github tags+release.
+  --rm-local-tags        clean local tags.
+  --rm-remote-tags       clean remote tags.
+  --rm-github-release    clean github release.
   -c, --created <list>   use new list replace default(dangerous).(eg: -c uat,test1).
   -h, --help             display help for command
 ~~~
