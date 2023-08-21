@@ -35,6 +35,7 @@ program
   .option('-i, --interactive', 'interactive operation cli.')
   .option('-p, --pushed <list>', 'add protected to default.(eg: -p uat,test1).')
   .option('-k, --clean-gh', 'clean github tags+release.')
+  .option('--rm-local-tags', 'clean local tags.')
   .option(
     '-c, --created <list>',
     'use new list replace default(dangerous).(eg: -c uat,test1).'
@@ -71,6 +72,7 @@ nx.declare({
       this.branches = nx.gitBranch();
     },
     start() {
+      console.log('program: ', program.rmLocalTags);
       if (program.cleanGh) return this.cleanGh();
       if (program.local || program.remote) {
         program.interactive && this.interactive();
@@ -78,6 +80,10 @@ nx.declare({
       } else {
         console.log(chalk.green('🐶 local/remote at least has one.'));
       }
+    },
+    rmLocalTags() {
+      exec('git tag -l | xargs git tag -d');
+      console.log(chalk.green('🐶 rm local tags done.'));
     },
     cleanGh() {
       // clean local tags
