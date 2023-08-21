@@ -36,6 +36,8 @@ program
   .option('-p, --pushed <list>', 'add protected to default.(eg: -p uat,test1).')
   .option('-k, --clean-gh', 'clean github tags+release.')
   .option('--rm-local-tags', 'clean local tags.')
+  .option('--rm-remote-tags', 'clean remote tags.')
+  .option('--rm-github-release', 'clean github release.')
   .option(
     '-c, --created <list>',
     'use new list replace default(dangerous).(eg: -c uat,test1).'
@@ -84,6 +86,20 @@ nx.declare({
     rmLocalTags() {
       exec('git tag -l | xargs git tag -d');
       console.log(chalk.green('🐶 rm local tags done.'));
+    },
+    rmRemoteTags() {
+      // git ls-remote --tags origin | grep -v "{}" | awk '{print $2}' | xargs git push --delete origin
+      exec(
+        'git ls-remote --tags origin | grep -v "{}" | awk "{print $2}" | xargs git push --delete origin'
+      );
+      console.log(chalk.green('🐶 rm remote tags done.'));
+    },
+    rmGithubRelease() {
+      // gh release list --limit 9999 | awk 'NR>1 {print $2}' | xargs -I {} gh release delete {} -y
+      exec(
+        'gh release list --limit 9999 | awk "NR>1 {print $2}" | xargs -I {} gh release delete {} -y'
+      );
+      console.log(chalk.green('🐶 rm github release done.'));
     },
     cleanGh() {
       // clean local tags
