@@ -75,7 +75,6 @@ nx.declare({
       this.branches = nx.gitBranch();
     },
     start() {
-      console.log('program: ', program.rmLocalTags);
       if (program.cleanGh) return this.cleanGh();
       if (program.local || program.remote) {
         program.interactive && this.interactive();
