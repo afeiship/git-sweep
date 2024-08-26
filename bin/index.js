@@ -14,6 +14,7 @@ const program = new Command();
 const exec = require('child_process').execSync;
 const PROTECTED_BRANCHES = [
   'master',
+  'main',
   'test',
   'alpha',
   'beta',
@@ -122,7 +123,7 @@ nx.declare({
     },
     run() {
       console.log(chalk.green('🚗 wating...'));
-      exec('git checkout master 2>/dev/null && git fetch --all --prune');
+      exec('git checkout main 2>/dev/null && git fetch --all --prune');
       if (program.local && program.remote) {
         this.local().then(() => {
           this.remote();
